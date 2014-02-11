@@ -1,0 +1,23 @@
+{% for e in errors %}
+<div class="alert alert-danger">{{ e }}</div>
+{% endfor %}
+<ul class="pager">
+  <li><a href="{{ path('authors') }}">Newest</a></li>
+  <li {% if previousURL is empty %} class="disabled"{% endif %}><a{% if not previousURL is empty %} href="{{ previousURL | default('#') | raw }}"{% endif %}> < Previous</a></li>
+  <li {% if nextURL is empty %} class="disabled"{% endif %}><a{% if not nextURL is empty %} href="{{ nextURL | default('#') |raw }}"{% endif %}>Next ></a></li>
+</ul>
+
+<ul class="list-group">
+{% for a in authors %}
+<li>
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<div>Id: {{ a.id }}</div>
+			<div>Author: {{ a.name }}</div>
+			<a href="{{ path('editAuthorView', {'authorId' : a.id }) }}" class="btn btn-primary">Edit</a>
+			<a href="{{ path('delAuthorView', {'authorId' : a.id }) }}" class="btn btn-danger">Delete</a>
+		</div>
+	</div>
+</li>
+{% endfor %}
+</ul>

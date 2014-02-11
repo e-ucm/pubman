@@ -1,0 +1,16 @@
+AuthType Basic
+AuthName "Restricted Area"
+AuthUserFile /var/www/www.e-ucm.es/pubman/.passwd
+Require valid-user
+
+<IfModule mod_rewrite.c>
+    Options -MultiViews
+
+    RewriteEngine On
+    RewriteBase /pubman/web
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [QSA,L]
+</IfModule>
+
+# or in Apache >= 2.26 (If application is not at webroot level you will have to adjust the path)
+# FallbackResource /pubman/web/index.php

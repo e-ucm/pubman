@@ -1,0 +1,33 @@
+{% for e in errors %}
+<div class="alert alert-danger">{{ e }}</div>
+{% endfor %}
+<ul class="pager">
+  <li><a href="{{ path('publications') }}">Newest</a></li>
+  <li {% if previousURL is empty %} class="disabled"{% endif %}><a{% if not previousURL is empty %} href="{{ previousURL | default('#') | raw }}"{% endif %}> < Previous</a></li>
+  <li {% if nextURL is empty %} class="disabled"{% endif %}><a{% if not nextURL is empty %} href="{{ nextURL | default('#') |raw }}"{% endif %}>Next ></a></li>
+</ul>
+
+<ul class="list-group">
+{% for p in publications %}
+<li>
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<div>Id: {{ p.id }}</div>
+			<div>Year: {{ p.year }}</div>
+			<div>Category: {{ p.category.name }}</div>
+			<div>Title: {{ p.title }}</span></div>
+			<div>Authors: {{ p.authorsList() }}</div>
+			<div>Details: {{ p.details }}</div>
+{% if not p.fileURL is null %}
+			<div><a href="{{ p.fileURL }}">Download</a></div>
+{% endif %}
+			<div>
+				<a href="{{ path('editPublicationView', {'publicationId' : p.id }) }}" class="btn btn-primary">Edit</a>
+				<a href="{{ path('delPublicationView', {'publicationId' : p.id }) }}" class="btn btn-danger">Delete</a>
+			</div>
+		</div>
+	</div>
+</li>
+{% endfor %}
+</ul>
+

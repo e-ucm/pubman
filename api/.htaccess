@@ -1,0 +1,11 @@
+<IfModule mod_rewrite.c>
+    Options -MultiViews
+
+    RewriteEngine On
+    RewriteBase /pubman/api
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [QSA,L]
+</IfModule>
+
+# or in Apache >= 2.26 (If application is not at webroot level you will have to adjust the path)
+# FallbackResource /pubman/api/index.php

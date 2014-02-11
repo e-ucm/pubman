@@ -1,0 +1,7 @@
+.list-group li {
+ 	list-style: none;
+}
+.panel-info, .panel-authors, .panel-more1 {
+	float: left;
+	margin: 0 10px;
+}

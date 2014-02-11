@@ -1,0 +1,8 @@
+Options -Indexes
+<IfModule mod_rewrite.c>
+    Options -MultiViews
+
+    RewriteEngine On
+    RewriteBase /pubman
+    RewriteRule ^ web/ [R=302,L]
+</IfModule>

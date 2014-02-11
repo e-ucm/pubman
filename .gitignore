@@ -1,0 +1,14 @@
+# Apache password file
+.passwd
+
+# Pubman current options
+config.php
+
+# Composer dependency directory
+vendor/
+
+# TWIG directory cache
+cache/
+
+# Pubman WP plugin current options
+wp/pubman/config.php
