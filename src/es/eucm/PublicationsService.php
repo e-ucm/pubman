@@ -207,7 +207,7 @@ class PublicationsService {
 				'required' => false
 			));
 		}
-		$form->add('Edit', 'submit');
+		$form->add('Update', 'submit');
 		$form=$form->getForm();
 
 		$form->handleRequest($request);
@@ -232,14 +232,14 @@ class PublicationsService {
 				$mimeType = $draft->getMimeType();
 				if (!empty($mimeType) && $mimeType === 'application/pdf') {
 					$fileName = "e-UCM_draft_{$publication->id}.pdf";
-					$draft->move(DRAFTS_FOLDER, $fileName);
-					$publication->fileURL = DRAFTS_URL_PREFIX.$fileName;
+					$draft->move(PUBMAN_DRAFTS_FOLDER, $fileName);
+					$publication->fileURL = PUBMAN_DRAFTS_URL_PREFIX.$fileName;
 					$app['publications.repository']->updateURLs($publication);
 				}
 			} else {
 				if ($data['delete_draft'] && !is_null($publication->fileURL)) {
 					$fileName = "e-UCM_draft_{$publication->id}.pdf";
-					if (!@unlink(DRAFTS_FOLDER.$fileName)) {
+					if (!@unlink(PUBMAN_DRAFTS_FOLDER.$fileName)) {
 						throw new \Exception('Error deleting file: '.$fileName);
 					}
 					$publication->fileURL = NULL;
@@ -311,7 +311,7 @@ class PublicationsService {
 			$app['publications.repository']->deletePublication($publication);
 			if(!is_null($publication->fileURL)) {
 				$fileName = "e-UCM_draft_{$publication->id}.pdf";
-				if (!@unlink(DRAFTS_FOLDER.$fileName)) {
+				if (!@unlink(PUBMAN_DRAFTS_FOLDER.$fileName)) {
 					throw new \Exception('Error deleting file: '.$fileName);
 				}
 			}

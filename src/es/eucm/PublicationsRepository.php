@@ -174,8 +174,8 @@ class PublicationsRepository {
         }
 
 	public function updateURLs(Publication $publication) {
-		return $this->sqltemplate->update('UPDATE publications SET fileURL = ?, externalURL = ? WHERE id = ?',
-			array('ssi', $publication->fileURL, $publication->externalURL, $publication->id)
+		return $this->sqltemplate->update('UPDATE publications SET fileURL = ? WHERE id = ?',
+			array('si', $publication->fileURL, $publication->id)
 		);
 	}
 
