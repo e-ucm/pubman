@@ -237,7 +237,7 @@ class PublicationsService {
 					$app['publications.repository']->updateURLs($publication);
 				}
 			} else {
-				if ($data['delete_draft'] && !is_null($publication->fileURL)) {
+				if (array_key_exists('delete_draft', $data) && $data['delete_draft'] && !is_null($publication->fileURL)) {
 					$fileName = "e-UCM_draft_{$publication->id}.pdf";
 					if (!@unlink(PUBMAN_DRAFTS_FOLDER.$fileName)) {
 						throw new \Exception('Error deleting file: '.$fileName);
